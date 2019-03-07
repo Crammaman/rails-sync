@@ -26,7 +26,6 @@ export default class RailsSync {
 
   static install( Vue, options ){
     var rs = new RailsSync({
-
       addNewRecord: (  records, id, record  ) => {
         if( records[ id ] ){
           Object.keys( record ).forEach( (key) => Vue.set( records[ id ], key, record[key] ) )

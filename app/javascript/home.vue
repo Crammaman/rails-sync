@@ -6,6 +6,7 @@
     </div> -->
     <div v-for="site in sites">
       <site :site="site"></site>
+      <!-- <customer :customer="site.customer"></customer> -->
     </div>
   </div>
 </template>

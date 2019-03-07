@@ -24,7 +24,26 @@ export default class Records {
 
   push( record ){
 
-    this._associations.forEach( ( association ) => record[ association.name ] = [1] )
+    this._associations.forEach( ( association ) => {
+      switch(association.type){
+      case 'ActiveRecord::Associations::HasManyAssociation':
+        record[ association.name ] = [1]
+        break
+      case 'ActiveRecord::Associations::BelongsToAssociation':
+        var standIn = {}
+        Object.defineProperty(standIn, "$count", {
+            enumerable: false,
+            writable: true
+        })
+        standIn.$count = 1
+        //this._addNewRecord( record, association.name, standIn )
+        record[ association.name ] = standIn
+        break
+
+      default:
+        console.log('Unknown know association type')
+      }
+    } )
 
     var newRecord = new Proxy( this.camelCaseKeys( record ), {
       get: ( record, property )=> this.getFromRecord( record, property, this )
@@ -68,6 +87,17 @@ export default class Records {
     return new Promise( (resolve, reject)=> this.awaitData(resolve, reject, filter) )
   }
 
+  awaitData( resolve, reject, filter ){
+    setTimeout( ()=>{
+      if( this._dataLoading[ filter ] ){
+        this.awaitData( resolve, reject, filter )
+      } else {
+        resolve()
+      }
+      //TODO there's something wrong with _dataLoading not working so this wait time has been cranked up.
+    }, 500 )
+  }
+
   // Adds records that match properties into records
   searchRecords( properties, records ){
 
@@ -92,16 +122,6 @@ export default class Records {
     } else {
       return !!this._subscriptions.find( ( sub ) => JSON.stringify(sub) == JSON.stringify(filter) )
     }
-  }
-
-  awaitData( resolve, reject, filter ){
-    setTimeout( ()=>{
-      if( this._dataLoading[ filter ] ){
-        this.awaitData( resolve, reject, filter )
-      } else {
-        resolve()
-      }
-    }, 150 )
   }
 
   // Subscribing to a record is the source of all data communication. With no filter
@@ -140,7 +160,6 @@ export default class Records {
 
   		}
   	})
-
   }
 
   loadIfAssociation( record, property ){
@@ -152,17 +171,20 @@ export default class Records {
 
       if( record[property][0] == 1 ){
         record[property].pop()
+      } else if( record[property].$count > 0 ){
+        record[property].$count--
       } else {
         this.loadRecords({ IsReference: true, record_id: record.id, association_name: property })
         .then( () => {
           var references = this._references.getRecord( record.id )[ property ]
 
           if( references.length > 0 && references.length !== record[property].length ){
+
             references.forEach( ( reference ) => record[property].push( association.model.find( reference ) ) )
-          } else if( typeof references.length === 'undefined' ) {
-            console.log(typeof references)
-            console.log(association.model.name)
-            this._addNewRecord( record, property, association.model.find( references ))
+
+          } else if( typeof references.length === 'undefined' && record[property].$count == 0 ) {
+            this._addNewRecord(record,property, association.model.find( references ))
+
           }
         })
       }

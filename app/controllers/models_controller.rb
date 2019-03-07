@@ -1,7 +1,5 @@
 class ModelsController < ApplicationController
 
-
-
   def index
 
     render json: model_descriptions
@@ -15,7 +13,7 @@ class ModelsController < ApplicationController
       {
         name: model.name,
         associations: model.reflect_on_all_associations.map do |a|
-          { name: a.name, class: a.class_name, type: a.type }
+          { name: a.name, class: a.class_name, type: a.association_class.name }
         end
       }
     end
