@@ -3,7 +3,7 @@ module RailsSync
 
     def index
 
-      render json: RailsSync::ApplicationHelper.model_descriptions
+      render json: RailsSync::Sync.model_descriptions
 
     end
   end

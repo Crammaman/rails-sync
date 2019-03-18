@@ -1,5 +1,5 @@
 module RailsSync
-  module ApplicationHelper
+  module ModelsHelper
     def self.model_descriptions
       Rails.application.eager_load! unless Rails.application.config.cache_classes
       ActiveRecord::Base.subclasses[1].descendants.map do |model|

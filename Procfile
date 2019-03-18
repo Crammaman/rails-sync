@@ -1,2 +1,2 @@
 web: rails s
-wepacker: bin/webpack-dev-server
+webpack: test/dummy/bin/webpack-dev-server
