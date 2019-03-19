@@ -4,9 +4,10 @@ module RailsSync
     # Describes what of each model should be sent as the sync records,
     # this is populated through calls to 'sync' in the model class
     @@model_descriptions = {}
+    @@loaded = false
 
     def self.model_descriptions
-      Rails.application.eager_load! unless Rails.application.config.cache_classes
+      ( Rails.application.eager_load! && @@loaded = true ) unless Rails.application.config.cache_classes || @@loaded
       @@model_descriptions
     end
 
@@ -82,7 +83,7 @@ module RailsSync
     end
 
     def self.model_names
-      @@model_descriptions.keys
+      model_descriptions.keys
     end
 
     def self.get_model_association model, association_name

@@ -77,8 +77,8 @@
         eval( params[:model] )
 
       else
-
-        raise 'Model parameter is not a registered sync model'
+        
+        raise "Model parameter: #{params[:model]} is not a registered sync model"
 
       end
     end

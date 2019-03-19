@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-sync (0.1.0)
+    active-sync (0.1.0)
       puma (>= 3.11)
       rails (>= 5.1.3)
 
@@ -128,7 +128,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rails-sync!
+  active-sync!
   sqlite3 (~> 1.3.6)
   webpacker (>= 3.5.5)
 

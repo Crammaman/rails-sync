@@ -5,7 +5,7 @@ require "rails_sync/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "rails-sync"
+  s.name        = "active-sync"
   s.version     = RailsSync::VERSION
   s.authors     = ["crammaman"]
   s.email       = ["smadams00@gmail.com"]
