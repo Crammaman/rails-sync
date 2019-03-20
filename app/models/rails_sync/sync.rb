@@ -11,6 +11,15 @@ module RailsSync
       @@model_descriptions
     end
 
+    def self.is_sync_model? model
+      
+      model_name = model.class == String ? model : model.name
+
+      model_descriptions.keys.include? model_name
+
+    end
+
+
     #Hash used in all general sync communication for a given model.
     def self.sync_record record
       @@model_descriptions[ record.class.name ][ :attributes ].reduce( {} ) do | hash, attribute |
@@ -80,10 +89,6 @@ module RailsSync
 
         end
       end
-    end
-
-    def self.model_names
-      model_descriptions.keys
     end
 
     def self.get_model_association model, association_name

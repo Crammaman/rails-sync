@@ -72,12 +72,12 @@
 
     def subscription_model
 
-      if RailsSync::Sync.model_names.include?( params[:model] )
+      if RailsSync::Sync.is_sync_model?( params[:model] )
 
         eval( params[:model] )
 
       else
-        
+
         raise "Model parameter: #{params[:model]} is not a registered sync model"
 
       end

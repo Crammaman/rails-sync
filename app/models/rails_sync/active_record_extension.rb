@@ -12,8 +12,9 @@ module RailsSync
     end
 
     def sync_change
-
-    	ActionCable.server.broadcast("#{self.class}_All", RailsSync::Sync.sync_record( self ) )
+      if RailsSync::Sync.is_sync_model? self.class
+  	     ActionCable.server.broadcast("#{self.class}_All", RailsSync::Sync.sync_record( self ) )
+      end
 
       #TODO send sync to all registered filtered channels that have this objects id.
 
