@@ -13,7 +13,7 @@ module RailsSync
 
     def sync_change
 
-    	ActionCable.server.broadcast("#{self.class}_All", RailsSync::sync.sync_record( self ) )
+    	ActionCable.server.broadcast("#{self.class}_All", RailsSync::Sync.sync_record( self ) )
 
       #TODO send sync to all registered filtered channels that have this objects id.
 
@@ -53,7 +53,7 @@ module RailsSync
       	self.all.map do |record|
           RailsSync::Sync.sync_record record
         end
-        
+
       end
 
       def sync_filtered filter
