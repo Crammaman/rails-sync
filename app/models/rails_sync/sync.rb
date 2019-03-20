@@ -12,7 +12,7 @@ module RailsSync
     end
 
     def self.is_sync_model? model
-      
+
       model_name = model.class == String ? model : model.name
 
       model_descriptions.keys.include? model_name
