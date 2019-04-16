@@ -1,4 +1,4 @@
-module RailsSync
+module ActiveSync
   module ModelsHelper
     def self.model_descriptions
       Rails.application.eager_load! unless Rails.application.config.cache_classes

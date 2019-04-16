@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class RailsSync::Test < ActiveSupport::TestCase
+class ActiveSync::Test < ActiveSupport::TestCase
   test "truth" do
-    assert_kind_of Module, RailsSync
+    assert_kind_of Module, ActiveSync
   end
 end

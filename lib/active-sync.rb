@@ -1,4 +1,4 @@
-require "rails_sync/engine"
-module RailsSync
+require "active_sync/engine"
+module ActiveSync
   # Your code goes here...
 end

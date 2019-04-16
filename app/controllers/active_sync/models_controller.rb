@@ -1,9 +1,9 @@
-module RailsSync
+module ActiveSync
   class ModelsController < ApplicationController
 
     def index
 
-      render json: RailsSync::Sync.model_descriptions
+      render json: ActiveSync::Sync.model_descriptions
 
     end
   end

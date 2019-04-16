@@ -1,6 +1,6 @@
 # Rails currently doesn't allow namespacing channels in an engine
-# module RailsSync
-  class RailsSyncChannel < ActionCable::Channel::Base
+# module ActiveSync
+  class ActiveSyncChannel < ActionCable::Channel::Base
     # For providing DashData with data from rails models
     # To change the data sent (like reducing how much is sent)
     # implement broadcast_model in the respective modelc
@@ -31,6 +31,7 @@
 
       else
 
+        subscription_model.register_sync_subscription "#{subscription_model.name}_#{checksum}", filter
         stream_from "#{subscription_model.name}_#{checksum}"
 
         # TODO ensure that params are safe to pass to the model then register for syncing to.
@@ -42,14 +43,10 @@
     def subscribe_references
 
       record = subscription_model.find( filter[:record_id] )
-      puts model_association
+
       if model_association
 
-        transmit( {
-          IsReference: true,
-          id: record.id,
-          model_association[:name] => associated_ids( record )
-        })
+        transmit( ActiveSync::Sync.association_record( model_association, record) )
 
       else
 
@@ -57,22 +54,15 @@
 
       end
 
+      subscription_model.register_sync_subscription "#{subscription_model.name}_#{checksum}", filter.merge( subscribed_model: subscription_model )
+      eval( model_association[:class] ).register_sync_subscription "#{subscription_model.name}_#{checksum}", filter.merge( subscribed_model: subscription_model )
       stream_from "#{subscription_model.name}_#{checksum}"
 
     end
 
-    def associated_ids record
-      if defined? record.send( model_association[:name] ).pluck
-
-        record.send( model_association[:name] ).pluck(:id)
-      else
-        record.send( model_association[:name] ).id
-      end
-    end
-
     def subscription_model
 
-      if RailsSync::Sync.is_sync_model?( params[:model] )
+      if ActiveSync::Sync.is_sync_model?( params[:model] )
 
         eval( params[:model] )
 
@@ -84,7 +74,7 @@
     end
 
     def model_association
-      RailsSync::Sync.get_model_association( subscription_model, filter[:association_name] )
+      ActiveSync::Sync.get_model_association( subscription_model, filter[:association_name] )
     end
 
     def filter

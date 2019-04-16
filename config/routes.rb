@@ -1,3 +1,3 @@
-RailsSync::Engine.routes.draw do
+ActiveSync::Engine.routes.draw do
   resources :models, only: [ :index ]
 end

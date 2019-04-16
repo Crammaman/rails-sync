@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "actioncable": "^5.2.2-1",
-    "camelcase": "^5.2.0"
+    "camelcase": "^5.2.0",
+    "snake-case": "^2.1.0"
   }
 }

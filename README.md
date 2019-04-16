@@ -1,4 +1,4 @@
-# RailsSync
+# ActiveSync
 Short description and motivation.
 
 ## Usage
@@ -8,7 +8,7 @@ How to use my plugin.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rails_sync'
+gem 'active_sync'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ $ bundle
 
 Or install it yourself as:
 ```bash
-$ gem install rails_sync
+$ gem install active_sync
 ```
 
 ## Contributing

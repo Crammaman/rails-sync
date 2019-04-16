@@ -1,4 +1,4 @@
-module RailsSync
+module ActiveSync
   class Sync
 
     # Describes what of each model should be sent as the sync records,
@@ -65,7 +65,6 @@ module RailsSync
 
         end
       end
-
     end
 
     def self.add_attributes_to_description model, attributes
@@ -80,14 +79,38 @@ module RailsSync
         association = model.reflect_on_all_associations.find{ |a| a.name == association_name }
 
         unless association.nil?
+          begin
 
-          @@model_descriptions[ model.name ][ :associations ] << { name: association.name.to_s, class: association.class_name, type: association.association_class.name }
+            @@model_descriptions[ model.name ][ :associations ] << { name: association.name.to_s, class: association.class_name, type: association.association_class.name }
+
+          rescue NotImplementedError
+
+            @@model_descriptions[ model.name ][ :associations ] << { name: association.name.to_s, class: association.class_name, type: 'ActiveRecord::Associations::HasManyThroughAssociation' }
+
+          end
 
         else
 
           throw "Association #{ association_name } not found for #{ model.name }"
 
         end
+      end
+    end
+
+    def self.association_record model_association, record
+      {
+       IsReference: true,
+       id: record.id,
+       model_association[:name] => associated_ids( record, model_association )
+     }
+    end
+
+    def self.associated_ids record, model_association
+      if defined? record.send( model_association[:name] ).pluck
+
+        record.send( model_association[:name] ).pluck(:id)
+      else
+        record.send( model_association[:name] ).id
       end
     end
 

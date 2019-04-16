@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from '../home.vue'
-import RailsSync from 'rails-sync'
+import ActiveSync from 'rails-sync'
 
-Vue.use( RailsSync )
+Vue.use( ActiveSync )
 
 document.addEventListener("DOMContentLoaded", e => {
   const app = new Vue({
