@@ -62,7 +62,7 @@ module ActiveSync
       end
 
       def sync_record_subscriptions
-        @@sync_record_subscriptions[ self.name ]
+        @@sync_record_subscriptions[ self.name ] || {}
       end
 
       # Sync configures the data that is used in general sync communication

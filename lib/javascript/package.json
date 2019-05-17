@@ -1,0 +1,27 @@
+{
+  "name": "rails-active-sync",
+  "version": "0.1.2",
+  "description": "Javascript for interacting with active-sync ruby gem.",
+  "main": "active-sync.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Crammaman/active-sync"
+  },
+  "keywords": [
+    "rails",
+    "dynamic",
+    "front",
+    "end",
+    "models"
+  ],
+  "dependencies": {
+    "actioncable": "^5.2.2-1",
+    "camelcase": "^5.2.0",
+    "snake-case": "^2.1.0"
+  },
+  "author": "Crammaman",
+  "license": "MIT"
+}
