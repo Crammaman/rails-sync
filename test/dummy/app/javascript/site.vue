@@ -1,7 +1,7 @@
 <template>
 <div>
   <p>{{site.name}}</p>
-  <p>{{site.customer.name}}</p>
+  <!-- <p>{{site.customer.name}}</p> -->
 </div>
 </template>
 <script>

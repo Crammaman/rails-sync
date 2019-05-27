@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from '../home.vue'
-import ActiveSync from 'rails-sync'
+import ActiveSync from 'active-sync'
 
 Vue.use( ActiveSync )
 

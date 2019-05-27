@@ -4,9 +4,9 @@
     <!-- <div v-for="customer in customers.slice(0,1)">
       <customer :customer="customer"></customer>
     </div> -->
-    <div v-for="site in sites">
-      <site :site="site"></site>
-      <!-- <customer :customer="site.customer"></customer> -->
+    <div v-for="customer in customers">
+      <!-- <site :site="site"></site> -->
+      <customer :customer="customer"></customer>
     </div>
   </div>
 </template>
@@ -17,8 +17,8 @@ import Site from './site.vue'
 export default {
   data: function () {
     return {
-      //customers: this.$Customer.all
-      sites: this.$Site.all
+      customers: this.$Customer.all
+      // sites: this.$Site.all
     }
   },
   components:{
