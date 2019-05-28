@@ -1,6 +1,6 @@
 {
   "name": "rails-active-sync",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Javascript for interacting with active-sync ruby gem.",
   "main": "active-sync.js",
   "scripts": {
