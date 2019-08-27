@@ -2,7 +2,7 @@
 <div>
   <p @click="expanded = !expanded">{{ customer.name }}</p>
   <div  v-if="expanded">
-    <site v-for="site in customer.sites" :key="'site'+site.id" :site="site"></site>
+    <site v-for="site in customer.load('sites').sites" :key="'site'+site.id" :site="site"></site>
   </div>
 </div>
 </template>
