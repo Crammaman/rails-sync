@@ -1,7 +1,17 @@
 {
   "dependencies": {
     "actioncable": "^5.2.2-1",
+    "axios": "^0.21.1",
     "camelcase": "^5.2.0",
+    "pluralize": "^8.0.0",
     "snake-case": "^2.1.0"
+  },
+  "devDependencies": {
+    "@rails/webpacker": "^4.0.2",
+    "vue": "^2.6.9",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.9",
+    "yarn": "^1.22.10",
+    "webpack-dev-server": "^3.2.1"
   }
 }

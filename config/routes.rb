@@ -1,3 +1,3 @@
 ActiveSync::Engine.routes.draw do
-  resources :models, only: [ :index ]
+  get '/index/:model', to: 'active_sync/models#index'
 end

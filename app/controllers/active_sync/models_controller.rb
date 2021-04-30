@@ -3,7 +3,7 @@ module ActiveSync
 
     def index
 
-      render json: ActiveSync::Sync.model_descriptions
+      render json: params[:model].camelize.constantize.all
 
     end
   end

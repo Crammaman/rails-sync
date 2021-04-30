@@ -2,7 +2,9 @@ import Vue from 'vue'
 import App from '../home.vue'
 import ActiveSync from 'active-sync'
 
-Vue.use( ActiveSync )
+let activeSync = new ActiveSync({ modelNames: ['Customer', 'Site'] })
+
+Vue.use( activeSync )
 
 document.addEventListener("DOMContentLoaded", e => {
   const app = new Vue({
