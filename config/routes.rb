@@ -1,3 +1,3 @@
 ActiveSync::Engine.routes.draw do
-  get '/index/:model', to: 'active_sync/models#index'
+  get '/:model', to: 'models#index'
 end
