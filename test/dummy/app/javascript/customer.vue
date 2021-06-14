@@ -2,7 +2,7 @@
 <div>
   <p @click="toggle">{{ customer.name }}</p>
   <div  v-if="expanded">
-    <site v-for="site in customer.sites" :key="'site'+site.id" :site="site"></site>
+    <site v-for="site in sites" :key="'site'+site.id" :site="site"></site>
   </div>
 </div>
 </template>

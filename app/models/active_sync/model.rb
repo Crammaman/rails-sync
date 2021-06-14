@@ -1,5 +1,5 @@
 module ActiveSync
-  module ActiveRecordExtension
+  module Model
     extend ActiveSupport::Concern
 
     included do
@@ -15,9 +15,6 @@ module ActiveSync
 
     def sync_change
       if ActiveSync::Sync.is_sync_model? self.class
-        #TODO properly accommodate multi process environment, since sync sync_subscriptions
-        # exists only in one process, if one process has a filter sub but another does not
-        # not all users will necessarily get broadcast to.
         ActionCable.server.broadcast("#{self.class}_All", ActiveSync::Sync.sync_record( self ) )
         self.class.sync_record_subscriptions.each do | stream, filter |
           unless filter[:IsReference]

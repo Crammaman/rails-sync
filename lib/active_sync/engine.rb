@@ -7,7 +7,6 @@ module ActiveSync
         mount ActiveSync::Engine, at: "/active_sync"
       end
 
-      ActiveRecord::Base.class_eval { include ActiveSync::ActiveRecordExtension }
     end
   end
 end
